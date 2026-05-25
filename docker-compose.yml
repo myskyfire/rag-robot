@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  rag-robot:
+    build: .
+    container_name: rag-robot
+    volumes:
+      # 挂载数据目录
+      - ./data:/app/data
+      - ./cache:/app/cache
+      - ./logs:/app/logs
+      - ./ocr_results:/app/ocr_results
+      # 挂载环境配置
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+    # 如果使用本地 Ollama，需要连接宿主机网络
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # 或者配置 Embedding 服务地址指向宿主机
+    # EMBEDDING_BASE_URL=http://host.docker.internal:11434
+    stdin_open: true
+    tty: true
+
+  # 可选：Ollama 服务（如果不想在宿主机运行）
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
+
+# volumes:
+#   ollama_data:

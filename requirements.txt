@@ -1,0 +1,16 @@
+fastapi>=0.110.0
+uvicorn>=0.27.0
+pymupdf>=1.23.0
+faiss-cpu>=1.7.4
+openai>=1.0.0
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+httpx>=0.27.0
+numpy>=1.24.0
+python-docx>=0.8.11
+openpyxl>=3.1.0
+python-pptx>=0.6.21
+
+# OCR（需要Python 3.12及以下版本）
+paddlepaddle>=3.0.0
+paddleocr>=2.7.0
